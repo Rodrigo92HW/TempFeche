@@ -15,12 +15,13 @@ const db = getDatabase();
 const reference = ref(db, 'number');
 
 let i = 0;
-setInterval(increment, 1000);
-
-function increment() {
-    i++;
-    document.getElementById('counter').textContent = i;
-
-    update(reference, { number: i })
-    .catch(error => console.log(error.message));
-}
+onValue(reference, (snapshot) => {
+  // Get the current value of 'number' from the database
+    er = snapshot.val() || 0;
+  // Update the counter with the current value of 'number'
+    document.getElementById('counter').textContent = number;
+  // Increment 'i' and set the new value of 'number' in the database
+    i = number + 1;
+    set(reference, i)
+        .catch(error => console.log(error.message));
+});
