@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, update } from 'firebase/database';
+import { getDatabase, ref, onValue } from 'firebase/database';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAsHqXAhdRYJCocmHT9TD2JuB_9O-sRjcM",
@@ -16,12 +16,16 @@ const reference = ref(db, 'number');
 
 let i = 0;
 onValue(reference, (snapshot) => {
-  // Get the current value of 'number' from the database
+    // Get the current value of 'number' from the database
     er = snapshot.val() || 0;
-  // Update the counter with the current value of 'number'
+    // Update the counter with the current value of 'number'
     document.getElementById('counter').textContent = number;
-  // Increment 'i' and set the new value of 'number' in the database
+    // Increment 'i' and set the new value of 'number' in the database
     i = number + 1;
     set(reference, i)
         .catch(error => console.log(error.message));
+    // Updates page number
+    const data = snapshot.val();
+    document.getElementById('counter').textContent = data;
+    
 });
