@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, update } from 'firebase/database';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAsHqXAhdRYJCocmHT9TD2JuB_9O-sRjcM",
@@ -21,6 +21,6 @@ function increment() {
     i++;
     document.getElementById('counter').textContent = i;
 
-    set(reference, i)
+    update(reference, { number: i })
     .catch(error => console.log(error.message));
 }
