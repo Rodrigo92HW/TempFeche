@@ -1,6 +1,5 @@
-import { initializeApp } from './node_modules/firebase/app.js';
-import { getDatabase, ref, set } from './node_modules/firebase/database';
-
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, set } from 'firebase/database';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAsHqXAhdRYJCocmHT9TD2JuB_9O-sRjcM",
@@ -28,5 +27,4 @@ onValue(reference, (snapshot) => {
     // Updates page number
     const data = snapshot.val();
     document.getElementById('counter').textContent = data;
-    
 });
