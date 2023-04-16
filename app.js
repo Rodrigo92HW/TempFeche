@@ -14,18 +14,18 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const reference = ref(db, 'number');
 
-// Initialize counter value to 0
-let counterValue = 0;
+// Set the initial value of 'number' in the database to 0
+set(reference, 0)
+    .catch(error => console.log(error.message));
 
-// Listen for changes to the 'number' value in the database
+let i = 0;
 onValue(reference, (snapshot) => {
-    // Update the counter value with the current value from the database
-    counterValue = snapshot.val() || 0;
-    document.getElementById('counter').textContent = counterValue;
+    // Get the current value of 'number' from the database
+    const number = snapshot.val() || 0;
+    // Update the counter with the current value of 'number'
+    document.getElementById('counter').textContent = number;
+    // Increment 'i' and set the new value of 'number' in the database
+    i = number + 1;
+    set(reference, i)
+        .catch(error => console.log(error.message));
 });
-
-// Increment the counter value and update the database every second
-setInterval(() => {
-    counterValue++;
-    set(reference, counterValue).catch(error => console.log(error.message));
-}, 1000);
