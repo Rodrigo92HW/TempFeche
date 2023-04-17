@@ -7,10 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    Número = <span id="counter"></span>
-
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
-    <script type="module" src="app.js" defer></script>
+    Count = <span id="counter">0</span>
 </body>
+
+<script>
+    var i = 0;
+    var interval = setInterval(increment, 1000);
+    function increment() {
+        i = i + 1;
+        document.getElementById("counter").textContent = i;
+    }
+</script>
+
 </html>
