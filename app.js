@@ -28,4 +28,5 @@ onValue(reference, (snapshot) => {
     i = number + 1;
     set(reference, i)
         .catch(error => console.log(error.message));
+    console.log(i);
 });
