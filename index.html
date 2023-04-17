@@ -9,36 +9,46 @@
 <body>
     Count = <span id="counter">0</span>
 
-    <!-- Import the Firebase JavaScript SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
-
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-        const firebaseConfig = {
-            apiKey: "AIzaSyAPYwJKrzxOItiv3Rm_3Qoh5upgraqk3Tg",
-            authDomain: "feche-261b7.firebaseapp.com",
-            projectId: "feche-261b7",
-            storageBucket: "feche-261b7.appspot.com",
-            messagingSenderId: "173009374249",
-            appId: "1:173009374249:web:2250fd5296636f122fe038"
-        };
+    import { getDatabase, ref, child, get, update } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAPYwJKrzxOItiv3Rm_3Qoh5upgraqk3Tg",
+        authDomain: "feche-261b7.firebaseapp.com",
+        projectId: "feche-261b7",
+        storageBucket: "feche-261b7.appspot.com",
+        messagingSenderId: "173009374249",
+        appId: "1:173009374249:web:2250fd5296636f122fe038"
+    };
     
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const counterRef = firebase.database().ref('counter');
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
 
-    // Listen for changes to the counter value in the database
-    counterRef.on('value', snapshot => {
-    const counter = snapshot.val();
-        document.getElementById('counter').textContent = counter;
-    });
+    let counterVariable;
+    let span = document.getElementById('counter');
+
+    windows.onload = function(){
+        const dbRef = ref(db);
+
+        get(child(dbRef, 'Counter')).then((snapshot) => {
+            counterVariable = Number(snapshot.val());
+            span.innerHTML = counterVariable;
+        })
+    }
 
     // Increment the counter value in the database every second
     setInterval(() => {
-        counterRef.transaction(counter => {
-            return (counter || 0) + 1;
-        });
+        const dbRef = ref(db);
+
+        get(child(dbRef, 'Counter')).then((snapshot) => {
+            counterVariable = Number(snapshot.val());
+            span.innerHTML = counterVariable;
+            counterVariable ++;
+        })
+
+        update(ref(db, "/"), {Counter: counterVariable});
     }, 1000);
     </script>
 </body>
