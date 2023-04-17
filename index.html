@@ -8,13 +8,40 @@
 </head>
 <body>
     Count = <span id="counter">0</span>
+
+    <!-- Import the Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPYwJKrzxOItiv3Rm_3Qoh5upgraqk3Tg",
+            authDomain: "feche-261b7.firebaseapp.com",
+            projectId: "feche-261b7",
+            storageBucket: "feche-261b7.appspot.com",
+            messagingSenderId: "173009374249",
+            appId: "1:173009374249:web:2250fd5296636f122fe038"
+        };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const counterRef = firebase.database().ref('counter');
+
+    // Listen for changes to the counter value in the database
+    counterRef.on('value', snapshot => {
+    const counter = snapshot.val();
+        document.getElementById('counter').textContent = counter;
+    });
+
+    // Increment the counter value in the database every second
+    setInterval(() => {
+        counterRef.transaction(counter => {
+            return (counter || 0) + 1;
+        });
+    }, 1000);
+    </script>
 </body>
-
-<script>
-    var worker = new Worker('worker.js');
-    worker.onmessage = function(event) {
-        document.getElementById('counter').textContent = event.data;
-    };
-</script>
-
 </html>
