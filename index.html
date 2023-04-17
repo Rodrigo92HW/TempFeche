@@ -14,8 +14,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
         const firebaseConfig = {
             apiKey: "AIzaSyAPYwJKrzxOItiv3Rm_3Qoh5upgraqk3Tg",
             authDomain: "feche-261b7.firebaseapp.com",
@@ -26,8 +25,7 @@
         };
     
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-
+    firebase.initializeApp(firebaseConfig);
     const counterRef = firebase.database().ref('counter');
 
     // Listen for changes to the counter value in the database
