@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import { getDatabase, ref, onValue, set } from 'firebase/database';
 
 const firebaseConfig = {
