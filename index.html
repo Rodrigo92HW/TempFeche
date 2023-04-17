@@ -11,12 +11,10 @@
 </body>
 
 <script>
-    var i = 0;
-    var interval = setInterval(increment, 1000);
-    function increment() {
-        i = i + 1;
-        document.getElementById("counter").textContent = i;
-    }
+    var worker = new Worker('worker.js');
+    worker.onmessage = function(event) {
+        document.getElementById('counter').textContent = event.data;
+    };
 </script>
 
 </html>
