@@ -29,7 +29,7 @@
     let counterVariable;
     let span = document.getElementById('counter');
 
-    windows.onload = function(){
+    window.onload = function(){
         const dbRef = ref(db);
 
         get(child(dbRef, 'Counter')).then((snapshot) => {
@@ -41,15 +41,14 @@
     // Increment the counter value in the database every second
     setInterval(() => {
         const dbRef = ref(db);
-
         get(child(dbRef, 'Counter')).then((snapshot) => {
             counterVariable = Number(snapshot.val());
             span.innerHTML = counterVariable;
-            counterVariable ++;
+            update(ref(db, "/"), {Counter: counterVariable + 1}); // update the database first
+            counterVariable ++; // then increment the counterVariable
         })
-
-        update(ref(db, "/"), {Counter: counterVariable});
     }, 1000);
+
     </script>
 </body>
 </html>
