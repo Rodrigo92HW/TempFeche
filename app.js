@@ -1,5 +1,5 @@
-import { initializeApp } from '@firebase/app';
-import { getDatabase, ref, onValue, set } from '@firebase/database';
+import firebase from 'firebase/app'
+import { getDatabase, ref, onValue, set } from 'firebase/database';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAsHqXAhdRYJCocmHT9TD2JuB_9O-sRjcM",
@@ -10,7 +10,7 @@ const firebaseConfig = {
     appId: "1:236658476401:web:a134e83748e7b68d0be2d0"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 const db = getDatabase();
 const reference = ref(db);
 
